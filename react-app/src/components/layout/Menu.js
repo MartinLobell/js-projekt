@@ -12,6 +12,7 @@ export default function Menu() {
 
   const linkStyle = {
     color: "yellow",
+    textDecoration: "none",
   }
   
   return (
