@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import Cardlist from './Cardlist.js';
+import { pokemons } from './pokemons.js';
+import SearchBox from './SearchBox.js';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+    constructor() {
+        super()
+        this.state = {
+            pokemons: pokemons,
+            searchfield: ""
+        }
+    }
+    onSearchChange = (event) => {
+        this.setState({ searchfield: event.target.value })
+    }
+
+    render() {
+        const filteredpokemons = this.state.pokemons.filter(pokemon => {
+            return pokemon.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
+        })
+        return (
+        <div className="tc">
+            <h1>Pokémon</h1>
+            <SearchBox searchChange={this.onSearchChange}/>
+            <Cardlist pokemons={filteredpokemons}/>
+        </div>
+        );
+    }
 }
 
 export default App;
