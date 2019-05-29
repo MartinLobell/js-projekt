@@ -1,35 +1,39 @@
 import React, { Component } from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
+import MyPokemons from './components/pages/MyPokemons.js';
+import Battle from './components/pages/Battle.js';
 import Cardlist from './components/Cardlist.js';
 import SearchBox from './components/SearchBox.js';
 import Menu from './components/layout/Menu.js';
+
 
 // Data imports
 import { cards } from './pokemons.js';
 
 class App extends Component {
     
-    constructor() {
-        super()
-        this.state = {
-            cards: cards,
-            searchfield: ""
-        }
-    }
-
-    // Rad 9-15 kan ersättas med rad 18-21 om vi vill.
-    // state = {
-    //     cards,
-    //     searchfield: "",
+    // constructor() {
+    //     super()
+    //     this.state = {
+    //         cards: cards,
+    //         searchfield: ""
+    //     }
     // }
+
+    state = {
+        cards,
+        searchfield: "",
+    }
+    
     onSearchChange = (event) => {
         this.setState({ searchfield: event.target.value })
     }
 
     render() {
-        const filteredcards = this.state.cards.filter(card => {
-            return card.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
-        })
+        // Kommenterade ut detta så länge så att appen ändå går att köra
+        // const filteredcards = this.state.cards.filter(card => {
+        //     return card.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
+        // })
 
         return (
         <Router>
@@ -39,16 +43,19 @@ class App extends Component {
                 <Route exact path="/" render={props => (
                     <React.Fragment>
                         <SearchBox searchChange={this.onSearchChange}/>
-                        <Cardlist cards={filteredcards}/>
+                        {/* <Cardlist cards={filteredcards}/> */}
                     </React.Fragment>
                 )} />
 
-                {/* Routes for de två andra sidorna */}
-                {/* <Route path="/my-card" component={About} /> */}
-                {/* <Route path="/battle" component={About} /> */}
+                <Route path="/my-cards" render={props => (
+                    <MyPokemons />
+                )} />
 
-            </div>
-                
+                <Route path="/battle" render={props => (
+                    <Battle />
+                )} />
+
+            </div>        
         </Router>
         );
     }
