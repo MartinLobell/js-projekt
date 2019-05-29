@@ -5,21 +5,21 @@ import SearchBox from './components/SearchBox.js';
 import Menu from './components/layout/Menu.js';
 
 // Data imports
-import { pokemons } from './pokemons.js';
+import { cards } from './pokemons.js';
 
 class App extends Component {
     
     constructor() {
         super()
         this.state = {
-            pokemons: pokemons,
+            cards: cards,
             searchfield: ""
         }
     }
 
     // Rad 9-15 kan ersättas med rad 18-21 om vi vill.
     // state = {
-    //     pokemons,
+    //     cards,
     //     searchfield: "",
     // }
     onSearchChange = (event) => {
@@ -27,8 +27,8 @@ class App extends Component {
     }
 
     render() {
-        const filteredpokemons = this.state.pokemons.filter(pokemon => {
-            return pokemon.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
+        const filteredcards = this.state.cards.filter(card => {
+            return card.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
         })
 
         return (
@@ -39,12 +39,12 @@ class App extends Component {
                 <Route exact path="/" render={props => (
                     <React.Fragment>
                         <SearchBox searchChange={this.onSearchChange}/>
-                        <Cardlist pokemons={filteredpokemons}/>
+                        <Cardlist cards={filteredcards}/>
                     </React.Fragment>
                 )} />
 
                 {/* Routes for de två andra sidorna */}
-                {/* <Route path="/my-pokemon" component={About} /> */}
+                {/* <Route path="/my-card" component={About} /> */}
                 {/* <Route path="/battle" component={About} /> */}
 
             </div>
