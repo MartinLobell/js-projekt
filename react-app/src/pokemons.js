@@ -6,7 +6,7 @@
  function getPokemons() {
      // API som kan hämta alla pokes på en gång. Default är 100 st. Hämtar bl.a. bilder på poke-kort
      // Hämtar i nuläget bara 68 Pokémon = Orsak okänd = Prio 1.
-     fetch(`https://api.pokemontcg.io/v1/cards/?setCode=base1&supertype=Pokemon`)
+     fetch(`https://api.pokemontcg.io/v1/cards/?setCode=base1|base2|base3&supertype=Pokemon&pageSize=151`)
      .then(function(res) {
          return res.json();
      })
