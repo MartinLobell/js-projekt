@@ -18,7 +18,7 @@ export default function Menu() {
   return (
     <header style={headerStyle}>
       <nav>
-        <Link to="/" style={linkStyle}>Home</Link> | <Link to="/" style={linkStyle}>My pokémon</Link> | <Link to="/" style={linkStyle}>Battle</Link>
+        <Link to="/" style={linkStyle}>Home</Link> | <Link to="/" style={linkStyle}>My Pokémon</Link> | <Link to="/" style={linkStyle}>Battle</Link>
       </nav>
     </header>
   )
