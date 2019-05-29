@@ -8,6 +8,7 @@ import Menu from './components/layout/Menu.js';
 import { pokemons } from './pokemons.js';
 
 class App extends Component {
+    
     constructor() {
         super()
         this.state = {
