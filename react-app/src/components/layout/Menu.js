@@ -15,7 +15,7 @@ export default function Menu() {
   const linkStyle = {
     color: "#ffeb3b",
     textDecoration: "none",
-    fontWeight: "bold",
+    fontWeight: "bold"
   }
   
   return (
