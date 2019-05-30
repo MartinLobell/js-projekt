@@ -8,7 +8,7 @@ import Menu from './components/layout/Menu.js';
 
 
 // Data imports
-import { cards } from './pokemons.js';
+// import { cards } from './pokemons.js';
 
 class App extends Component {
     
@@ -21,8 +21,21 @@ class App extends Component {
     // }
 
     state = {
-        cards,
+        cards: [],
+        cardsLoaded: false,
         searchfield: "",
+    }
+
+    getPokeCard() {
+        fetch(`https://api.pokemontcg.io/v1/cards/?setCode=base1|base2|base3&supertype=Pokemon&pageSize=151`)
+            .then(res => res.json())
+            .then(json => {
+                console.log(json);
+                this.setState({
+                    cards: json,
+                    cardsLoaded: true,
+                })
+            });
     }
     
     onSearchChange = (event) => {
@@ -35,29 +48,62 @@ class App extends Component {
         //     return card.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
         // })
 
-        return (
-        <Router>
-            <div className="tc" id="main-container">
-                <Menu />
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1280px-International_Pok%C3%A9mon_logo.svg.png" alt="Poke-logo" width="400px"></img>
-                <Route exact path="/" render={props => (
-                    <React.Fragment>
-                        <SearchBox searchChange={this.onSearchChange}/>
-                        {/* <Cardlist cards={filteredcards}/> */}
-                    </React.Fragment>
-                )} />
+        // Kör metod som hämtar pokemon
+        this.getPokeCard();
 
-                <Route path="/my-cards" render={props => (
-                    <MyPokemons />
-                )} />
+        let { cards, cardsLoaded } = this.state;
 
-                <Route path="/battle" render={props => (
-                    <Battle />
-                )} />
-
-            </div>        
-        </Router>
-        );
+        // Detta renderas innan pokes har hämtats
+        if (!cardsLoaded) {
+            return (
+                <Router>
+                    <div className="tc" id="main-container">
+                        <Menu />
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1280px-International_Pok%C3%A9mon_logo.svg.png" alt="Poke-logo" width="400px"></img>
+                        <Route exact path="/" render={props => (
+                            <React.Fragment>
+                                {/* Hade kunnat ha en laddingsbild / animering här */}
+                                <div>Loading...</div>
+                            </React.Fragment>
+                        )} />
+        
+                        <Route path="/my-cards" render={props => (
+                            <MyPokemons />
+                        )} />
+        
+                        <Route path="/battle" render={props => (
+                            <Battle />
+                        )} />
+        
+                    </div>        
+                </Router>
+                ); 
+        } else {
+            // Detta stycket körs automatiskt när cardsLoaded ändrar från false till true
+            return (
+                <Router>
+                    <div className="tc" id="main-container">
+                        <Menu />
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1280px-International_Pok%C3%A9mon_logo.svg.png" alt="Poke-logo" width="400px"></img>
+                        <Route exact path="/" render={props => (
+                            <React.Fragment>
+                                <SearchBox searchChange={this.onSearchChange}/>
+                                {/* <Cardlist cards={filteredcards}/> */}
+                            </React.Fragment>
+                        )} />
+        
+                        <Route path="/my-cards" render={props => (
+                            <MyPokemons />
+                        )} />
+        
+                        <Route path="/battle" render={props => (
+                            <Battle />
+                        )} />
+        
+                    </div>        
+                </Router>
+                );    
+        }   
     }
 }
 
