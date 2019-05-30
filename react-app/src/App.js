@@ -5,6 +5,7 @@ import Battle from './components/pages/Battle.js';
 import Cardlist from './components/Cardlist.js';
 import SearchBox from './components/SearchBox.js';
 import Menu from './components/layout/Menu.js';
+import LoadingAnimation from './components/layout/LoadingAnimation.js';
 
 
 // Data imports
@@ -31,7 +32,6 @@ class App extends Component {
         fetch(`https://api.pokemontcg.io/v1/cards/?setCode=base1|base2|base3&supertype=Pokemon&pageSize=151`)
             .then(res => res.json())
             .then(json => {
-                console.log(json);
                 this.setState({
                     cards: json.cards,
                     cardsLoaded: true,
@@ -61,8 +61,7 @@ class App extends Component {
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1280px-International_Pok%C3%A9mon_logo.svg.png" alt="Poke-logo" width="400px"></img>
                         <Route exact path="/" render={props => (
                             <React.Fragment>
-                                {/* Hade kunnat ha en laddingsbild / animering här */}
-                                <div>Loading...</div>
+                                <LoadingAnimation />
                             </React.Fragment>
                         )} />
         
@@ -79,8 +78,6 @@ class App extends Component {
                 ); 
         } else {
             // Detta stycket körs automatiskt när cardsLoaded ändrar från false till true
-            console.log(cards);
-            
             return (
                 <Router>
                     <div className="tc" id="main-container">
