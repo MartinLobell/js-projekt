@@ -11,7 +11,7 @@ const Cardlist = ({ cards }) => {
                     key={i} 
                     id={cards[i].id} 
                     name={cards[i].name}
-                    image={cards[1].imageUrl}
+                    image={cards[i].imageUrl}
                 />
                 );
             })

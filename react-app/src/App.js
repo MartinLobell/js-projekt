@@ -12,11 +12,12 @@ import Menu from './components/layout/Menu.js';
 
 class App extends Component {
     
-    // constructor() {
-    //     super()
+    // constructor(props) {
+    //     super(props)
     //     this.state = {
-    //         cards: cards,
-    //         searchfield: ""
+    //         cards: [],
+    //         cardsLoaded: false,
+    //         searchfield: "",
     //     }
     // }
 
@@ -32,7 +33,7 @@ class App extends Component {
             .then(json => {
                 console.log(json);
                 this.setState({
-                    cards: json,
+                    cards: json.cards,
                     cardsLoaded: true,
                 })
             });
@@ -44,17 +45,15 @@ class App extends Component {
 
     render() {
         // Kommenterade ut detta så länge så att appen ändå går att köra
-        // const filteredcards = this.state.cards.filter(card => {
-        //     return card.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
-        // })
-
-        // Kör metod som hämtar pokemon
-        this.getPokeCard();
+        const filteredcards = this.state.cards.filter(card => {
+            return card.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
+        })
 
         let { cards, cardsLoaded } = this.state;
 
         // Detta renderas innan pokes har hämtats
         if (!cardsLoaded) {
+            this.getPokeCard();
             return (
                 <Router>
                     <div className="tc" id="main-container">
@@ -80,6 +79,8 @@ class App extends Component {
                 ); 
         } else {
             // Detta stycket körs automatiskt när cardsLoaded ändrar från false till true
+            console.log(cards);
+            
             return (
                 <Router>
                     <div className="tc" id="main-container">
@@ -88,7 +89,9 @@ class App extends Component {
                         <Route exact path="/" render={props => (
                             <React.Fragment>
                                 <SearchBox searchChange={this.onSearchChange}/>
-                                {/* <Cardlist cards={filteredcards}/> */}
+                                <section>
+                                    <Cardlist cards={filteredcards}/>
+                                </section>
                             </React.Fragment>
                         )} />
         

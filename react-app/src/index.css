@@ -11,6 +11,10 @@ body {
   padding-bottom: 2rem;
 }
 
+section {
+  padding: 2rem 0;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
