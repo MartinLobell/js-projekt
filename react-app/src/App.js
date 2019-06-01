@@ -29,7 +29,7 @@ class App extends Component {
     }
 
     getPokeCard() {
-        fetch(`https://api.pokemontcg.io/v1/cards/?setCode=base1|base2|base3&supertype=Pokemon&pageSize=151`)
+        fetch(`https://api.pokemontcg.io/v1/cards/?setCode=base1|base2|Jungle|Fossil&supertype=Pokemon&pageSize=500`)
             .then(res => res.json())
             .then(json => {
                 this.setState({

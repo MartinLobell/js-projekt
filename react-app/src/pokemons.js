@@ -5,7 +5,7 @@
 
 function getPokemons() {
     // API som kan hämta alla pokes på en gång. Default är 100 st. Hämtar bl.a. bilder på poke-kort
-    fetch(`https://api.pokemontcg.io/v1/cards/?setCode=base1|base2|base3&supertype=Pokemon&pageSize=151`)
+    fetch(`https://api.pokemontcg.io/v1/cards/?setCode=base2&supertype=Pokemon&pageSize=130`)
     .then(function(res) {
         return res.json();
     })
