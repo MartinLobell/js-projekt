@@ -12,23 +12,21 @@ import LoadingAnimation from './components/layout/LoadingAnimation.js';
 // import { cards } from './pokemons.js';
 
 class App extends Component {
-    
-    // constructor(props) {
-    //     super(props)
-    //     this.state = {
-    //         cards: [],
-    //         cardsLoaded: false,
-    //         searchfield: "",
-    //     }
-    // }
 
     state = {
         cards: [],
         cardsLoaded: false,
         searchfield: "",
+        userCards: []
     }
 
-    getPokeCard() {
+    // Körs automatiskt när komponenter laddas in i DOM
+    componentDidMount() {
+        this.getPokeCard(); // API request
+        this.loadCardsToState(); // Hämtar sparade kort från LS
+    }
+
+    getPokeCard = () => {
         fetch(`https://api.pokemontcg.io/v1/cards/?setCode=base1|base2|Jungle|Fossil&supertype=Pokemon&pageSize=500`)
             .then(res => res.json())
             .then(json => {
@@ -38,13 +36,58 @@ class App extends Component {
                 })
             });
     }
-    
+
+    saveCard = (e) => {
+        let cardID;
+        let currentElement = e.target
+        let continueLoop = true;
+        let pokeName;
+        while (continueLoop === true) {
+            if (currentElement.hasAttribute("data-id")) {
+                cardID = currentElement.getAttribute("data-id");
+                pokeName = currentElement.getAttribute("data-name");
+                continueLoop = false;
+            } else {
+                currentElement = currentElement.parentElement;
+            }
+        }
+
+        if (window.confirm(`Sure you want to add ${pokeName} to your list of pokemon cards?`)) {
+            this.state.cards.map(card => {
+                if (card.id === cardID) {
+                    this.setState({
+                        userCards: [...this.state.userCards, card],
+                    })
+                    this.saveCardToLS(card);
+                }
+            })
+        } else {
+            alert("No cards was saved");
+        }
+    }
+
+    saveCardToLS = (card) => {
+        let userCards = this.getCardsFromLS();
+        userCards.push(card);
+        localStorage.setItem("userCards", JSON.stringify(userCards));
+    }
+
+    getCardsFromLS = () => {
+        return localStorage.getItem("userCards") === null ? [] : JSON.parse(localStorage.getItem("userCards"));
+    }
+
+    // Sparar kort lagrade i LS till state
+    loadCardsToState = () => {
+        this.setState({
+            userCards: this.getCardsFromLS(),
+        })
+    }
+
     onSearchChange = (event) => {
         this.setState({ searchfield: event.target.value })
     }
 
     render() {
-        // Kommenterade ut detta så länge så att appen ändå går att köra
         const filteredcards = this.state.cards.filter(card => {
             return card.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
         })
@@ -53,7 +96,6 @@ class App extends Component {
 
         // Detta renderas innan pokes har hämtats
         if (!cardsLoaded) {
-            this.getPokeCard();
             return (
                 <Router>
                     <div className="tc" id="main-container">
@@ -77,7 +119,6 @@ class App extends Component {
                 </Router>
                 ); 
         } else {
-            // Detta stycket körs automatiskt när cardsLoaded ändrar från false till true
             return (
                 <Router>
                     <div className="tc" id="main-container">
@@ -87,7 +128,9 @@ class App extends Component {
                             <React.Fragment>
                                 <SearchBox searchChange={this.onSearchChange}/>
                                 <section>
-                                    <Cardlist cards={filteredcards}/>
+                                    <Cardlist
+                                        cards={filteredcards}
+                                        saveCard={this.saveCard}/>
                                 </section>
                             </React.Fragment>
                         )} />

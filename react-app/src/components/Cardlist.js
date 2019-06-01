@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from './Card.js';
 
-const Cardlist = ({ cards }) => {
+const Cardlist = ({ cards, saveCard }) => {
     return (
         <div>
             {
@@ -12,6 +12,7 @@ const Cardlist = ({ cards }) => {
                     id={cards[i].id} 
                     name={cards[i].name}
                     image={cards[i].imageUrl}
+                    saveCard={saveCard}
                 />
                 );
             })
