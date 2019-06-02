@@ -5,13 +5,14 @@ const Cardlist = ({ cards, saveCard }) => {
     return (
         <div>
             {
-            cards.map((user, i) => {
+            cards.sort((a, b) => a.nationalPokedexNumber - b.nationalPokedexNumber).map((user, i) => {
             return ( 
                 <Card 
                     key={i} 
                     id={cards[i].id} 
                     name={cards[i].name}
                     image={cards[i].imageUrl}
+                    nationalPokedexNumber={cards[i].nationalPokedexNumber}
                     saveCard={saveCard}
                 />
                 );

@@ -8,7 +8,7 @@ import Menu from './components/layout/Menu.js';
 import LoadingAnimation from './components/layout/LoadingAnimation.js';
 
 // Externa bibliotek
-import Swal from 'sweetalert2';
+// import Swal from 'sweetalert2';
 
 
 class App extends Component {
@@ -62,12 +62,12 @@ class App extends Component {
         }
 
         if (this.checkDuplicateCards(pokeName)){
-            if (window.confirm(`You already have this card in your collection. Do you want to remove ${pokeName} from your list of pokemon cards?`)) {
+            if (window.confirm(`You already have this card in your collection. Do you want to remove ${pokeName} from your list of Pokémon cards?`)) {
                 this.removeCard(pokeName);
             }
         }
 
-        else if (window.confirm(`Sure you want to add ${pokeName} to your list of pokemon cards?`)) {
+        else if (window.confirm(`Sure you want to add ${pokeName} to your list of Pokémon cards?`)) {
             this.state.cards.forEach(card => {
                 if (card.id === cardID) {
                     this.setState({
