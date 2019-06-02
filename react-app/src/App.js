@@ -163,7 +163,8 @@ class App extends Component {
                             <React.Fragment>
                                 <section>
                                     <Cardlist
-                                        cards={this.state.userCards}/>
+                                        cards={this.state.userCards}
+                                        saveCard={this.saveCard}/>
                                 </section>
                             </React.Fragment>
                         )} />
