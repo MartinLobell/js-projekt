@@ -28,11 +28,11 @@ class App extends Component {
 
     // Hämtar pokes från API
     getPokeCard = () => {
-        fetch(`https://api.pokemontcg.io/v1/cards/?setCode=base1|base2|Jungle|Fossil&supertype=Pokemon&pageSize=500`)
+        fetch(`https://api.pokemontcg.io/v1/cards/?setCode=base1|base2|base3&set=fossil&supertype=Pokemon&pageSize=500`)
             .then(res => res.json())
             .then(json => {
                 this.setState({
-                    cards: json.cards,
+                    cards: json.cards.filter(card => card.nationalPokedexNumber <= 151),
                     cardsLoaded: true,
                 })
             });
