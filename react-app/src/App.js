@@ -32,7 +32,7 @@ class App extends Component {
             .then(res => res.json())
             .then(json => {
                 this.setState({
-                    cards: json.cards,
+                    cards: json.cards.filter(card => card.nationalPokedexNumber <= 151),
                     cardsLoaded: true,
                 })
             });
