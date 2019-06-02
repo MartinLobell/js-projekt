@@ -53,7 +53,9 @@ class App extends Component {
         }
 
         if (this.checkDuplicateCards(pokeName)){
-            alert("You already have this card in your collection.");
+            if (window.confirm(`You already have this card in your collection. Do you want to remove ${pokeName} from your list of pokemon cards?`)) {
+                this.removeCard(pokeName);
+            }
         }
 
         else if (window.confirm(`Sure you want to add ${pokeName} to your list of pokemon cards?`)) {
@@ -86,6 +88,15 @@ class App extends Component {
                 return true;
             }
         }
+    }
+
+    removeCard = (pokeName) => {
+        for(var key in this.state.userCards) {
+            if (pokeName == this.state.userCards[key]["name"]){
+                delete this.state.userCards[key];
+            }
+        }
+        
     }
 
     // Sparar kort lagrade i LS till state
