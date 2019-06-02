@@ -107,11 +107,10 @@ class App extends Component {
     }
 
     removeCard = (pokeName) => {
-        const updatedUserCards = [...this.state.userCards.filter(card => card.name !== pokeName)]
         this.setState({
-            userCards: updatedUserCards,
+            userCards: [...this.state.userCards.filter(card => card.name !== pokeName)],
         })
-        this.saveCardsToLS(updatedUserCards);            
+        this.saveCardsToLS(this.state.userCards);            
     };                
 
     filterUserCards = () => {
