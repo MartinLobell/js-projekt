@@ -83,20 +83,34 @@ class App extends Component {
     }
 
     checkDuplicateCards = (pokeName) => {
+        console.log(this.state.userCards);
+        this.filterUserCards();
         for(var key in this.state.userCards) {
-            if (pokeName == this.state.userCards[key]["name"]){
-                return true;
+            if (this.state.userCards[key] != null) {
+                if (pokeName === this.state.userCards[key]["name"]){
+                    return true;
+                }
             }
         }
     }
 
     removeCard = (pokeName) => {
         for(var key in this.state.userCards) {
-            if (pokeName == this.state.userCards[key]["name"]){
-                delete this.state.userCards[key];
+            if (this.state.userCards[key] != undefined){
+                if (pokeName === this.state.userCards[key]["name"]){
+                    delete this.state.userCards[key];
+                    this.filterUserCards();
+                }
             }
         }
-        
+    }
+
+    filterUserCards = () => {
+        var filteredUserCards = this.state.userCards.filter(function (idx) {
+            return idx != null;
+        });
+        this.state.userCards = filteredUserCards;
+        localStorage.setItem("userCards", JSON.stringify(this.state.userCards));
     }
 
     // Sparar kort lagrade i LS till state
