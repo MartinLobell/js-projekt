@@ -8,9 +8,6 @@ import Menu from './components/layout/Menu.js';
 import LoadingAnimation from './components/layout/LoadingAnimation.js';
 
 
-// Data imports
-// import { cards } from './pokemons.js';
-
 class App extends Component {
 
     state = {
@@ -26,6 +23,7 @@ class App extends Component {
         this.loadCardsToState(); // Hämtar sparade kort från LS
     }
 
+    // Hämtar pokes från API
     getPokeCard = () => {
         fetch(`https://api.pokemontcg.io/v1/cards/?setCode=base1|base2|Jungle|Fossil&supertype=Pokemon&pageSize=500`)
             .then(res => res.json())
@@ -37,6 +35,14 @@ class App extends Component {
             });
     }
 
+    // Sparar kort lagrade i LS till state
+    loadCardsToState = () => {
+        this.setState({
+            userCards: this.getCardsFromLS(),
+        })
+    }
+
+    // Sparar nytt kort i LS och state
     saveCard = (e) => {
         let cardID;
         let currentElement = e.target
@@ -59,7 +65,7 @@ class App extends Component {
         }
 
         else if (window.confirm(`Sure you want to add ${pokeName} to your list of pokemon cards?`)) {
-            this.state.cards.map(card => {
+            this.state.cards.forEach(card => {
                 if (card.id === cardID) {
                     this.setState({
                         userCards: [...this.state.userCards, card],
@@ -72,10 +78,16 @@ class App extends Component {
         }
     }
 
+    // Lägger till ett kort i LS
     saveCardToLS = (card) => {
         let userCards = this.getCardsFromLS();
         userCards.push(card);
         localStorage.setItem("userCards", JSON.stringify(userCards));
+    }
+
+    // Uppdaterar kort i LS med en lista med kort
+    saveCardsToLS = (cards) => {
+        localStorage.setItem("userCards", JSON.stringify(cards));
     }
 
     getCardsFromLS = () => {
@@ -95,29 +107,21 @@ class App extends Component {
     }
 
     removeCard = (pokeName) => {
-        for(var key in this.state.userCards) {
-            if (this.state.userCards[key] != undefined){
-                if (pokeName === this.state.userCards[key]["name"]){
-                    delete this.state.userCards[key];
-                    this.filterUserCards();
-                }
-            }
-        }
-    }
+        const updatedUserCards = [...this.state.userCards.filter(card => card.name !== pokeName)]
+        this.setState({
+            userCards: updatedUserCards,
+        })
+        this.saveCardsToLS(updatedUserCards);            
+    };                
 
     filterUserCards = () => {
         var filteredUserCards = this.state.userCards.filter(function (idx) {
             return idx != null;
         });
-        this.state.userCards = filteredUserCards;
-        localStorage.setItem("userCards", JSON.stringify(this.state.userCards));
-    }
-
-    // Sparar kort lagrade i LS till state
-    loadCardsToState = () => {
         this.setState({
-            userCards: this.getCardsFromLS(),
+            userCards: filteredUserCards,
         })
+        localStorage.setItem("userCards", JSON.stringify(this.state.userCards));
     }
 
     onSearchChange = (event) => {
@@ -129,8 +133,7 @@ class App extends Component {
             return card.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
         })
 
-
-        let { cards, cardsLoaded } = this.state;
+        let { cardsLoaded } = this.state;
 
         // Detta renderas innan pokes har hämtats
         if (!cardsLoaded) {
