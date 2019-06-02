@@ -52,7 +52,11 @@ class App extends Component {
             }
         }
 
-        if (window.confirm(`Sure you want to add ${pokeName} to your list of pokemon cards?`)) {
+        if (this.checkDuplicateCards(pokeName)){
+            alert("You already have this card in your collection.");
+        }
+
+        else if (window.confirm(`Sure you want to add ${pokeName} to your list of pokemon cards?`)) {
             this.state.cards.map(card => {
                 if (card.id === cardID) {
                     this.setState({
@@ -62,7 +66,7 @@ class App extends Component {
                 }
             })
         } else {
-            alert("No cards was saved");
+            alert("No cards were saved");
         }
     }
 
@@ -74,6 +78,14 @@ class App extends Component {
 
     getCardsFromLS = () => {
         return localStorage.getItem("userCards") === null ? [] : JSON.parse(localStorage.getItem("userCards"));
+    }
+
+    checkDuplicateCards = (pokeName) => {
+        for(var key in this.state.userCards) {
+            if (pokeName == this.state.userCards[key]["name"]){
+                return true;
+            }
+        }
     }
 
     // Sparar kort lagrade i LS till state
@@ -91,6 +103,7 @@ class App extends Component {
         const filteredcards = this.state.cards.filter(card => {
             return card.name.toLowerCase().includes(this.state.searchfield.toLowerCase());
         })
+
 
         let { cards, cardsLoaded } = this.state;
 
@@ -136,7 +149,12 @@ class App extends Component {
                         )} />
         
                         <Route path="/my-cards" render={props => (
-                            <MyPokemons />
+                            <React.Fragment>
+                                <section>
+                                    <Cardlist
+                                        cards={this.state.userCards}/>
+                                </section>
+                            </React.Fragment>
                         )} />
         
                         <Route path="/battle" render={props => (
