@@ -7,6 +7,9 @@ import SearchBox from './components/SearchBox.js';
 import Menu from './components/layout/Menu.js';
 import LoadingAnimation from './components/layout/LoadingAnimation.js';
 
+// Externa bibliotek
+import Swal from 'sweetalert2';
+
 
 class App extends Component {
 
@@ -73,8 +76,6 @@ class App extends Component {
                     this.saveCardToLS(card);
                 }
             })
-        } else {
-            alert("No cards were saved");
         }
     }
 
