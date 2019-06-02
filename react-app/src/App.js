@@ -138,7 +138,7 @@ class App extends Component {
                 <Router>
                     <div className="tc" id="main-container">
                         <Menu />
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1280px-International_Pok%C3%A9mon_logo.svg.png" alt="Poke-logo" width="400px"></img>
+                        <a href="/"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1280px-International_Pok%C3%A9mon_logo.svg.png" alt="Poke-logo" width="400px"></img></a>
                         <Route exact path="/" render={props => (
                             <React.Fragment>
                                 <LoadingAnimation />
@@ -161,7 +161,7 @@ class App extends Component {
                 <Router>
                     <div className="tc" id="main-container">
                         <Menu />
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1280px-International_Pok%C3%A9mon_logo.svg.png" alt="Poke-logo" width="400px"></img>
+                        <a href="/"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1280px-International_Pok%C3%A9mon_logo.svg.png" alt="Poke-logo" width="400px"></img></a>
                         <Route exact path="/" render={props => (
                             <React.Fragment>
                                 <SearchBox searchChange={this.onSearchChange}/>
