@@ -17,13 +17,15 @@ class App extends Component {
         cards: [],
         cardsLoaded: false,
         searchfield: "",
-        userCards: []
+        userCards: [],
+        cpuCards: []
     }
 
     // Körs automatiskt när komponenter laddas in i DOM
     componentDidMount() {
         this.getPokeCard(); // API request
         this.loadCardsToState(); // Hämtar sparade kort från LS
+        this.getRandomPokeCard(); // Generates a random card for duel opponent.
     }
 
     // Hämtar pokes från API
@@ -129,6 +131,16 @@ class App extends Component {
             userCards: filteredUserCards,
         })
         localStorage.setItem("userCards", JSON.stringify(this.state.userCards));
+    }
+
+    getRandomPokeCard = () => {
+
+        var randomNumber = Math.floor((Math.random() * 151) + 1);
+        var randomPokeCard = this.state.cards[randomNumber];
+        this.setState({
+            cpuCards: randomPokeCard,
+        })
+        console.log(randomPokeCard);
     }
 
     onSearchChange = (event) => {
