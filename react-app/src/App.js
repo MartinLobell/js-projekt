@@ -75,7 +75,9 @@ class App extends Component {
         if (this.checkDuplicateCards(pokeName)){
             if (Swal.fire({  
                 title: 'Card Removed!',  
-                text: 'Your changes have been saved.',
+                imageUrl: 'https://scontent.cdninstagram.com/vp/f010379fcf3c2faae3d1e506f7df182f/5D3002CF/t51.2885-15/e35/s480x480/52905174_2373692596031805_4996684431720486663_n.jpg?_nc_ht=scontent-lax3-1.cdninstagram.com',
+                imageWidth: 300,
+                text: 'Your changes have been saved.'
             })) {
                 this.removeCard(pokeName);
             }
