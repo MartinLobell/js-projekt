@@ -53,6 +53,11 @@ class App extends Component {
         let currentElement = e.target
         let continueLoop = true;
         let pokeName;
+        // Hindrar användaren från att spara mer än 6 kort
+        if (this.state.userCards.length >= 6) {
+            alert("You have reached the limit of 6 cards");
+            return null
+        }
         while (continueLoop === true) {
             if (currentElement.hasAttribute("data-id")) {
                 cardID = currentElement.getAttribute("data-id");
