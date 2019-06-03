@@ -206,7 +206,13 @@ class App extends Component {
                         )} />
         
                         <Route path="/battle" render={props => (
-                            <Battle />
+                            <React.Fragment>
+                                <section>
+                                    <Battle
+                                        cards={this.state.userCards}
+                                        saveCard={this.saveCard}/>
+                                </section>
+                            </React.Fragment>
                         )} />
         
                     </div>        
