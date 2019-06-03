@@ -8,7 +8,7 @@ import Menu from './components/layout/Menu.js';
 import LoadingAnimation from './components/layout/LoadingAnimation.js';
 
 // Externa bibliotek
-import Swal from 'sweetalert2';
+// import Swal from 'sweetalert2';
 
 
 class App extends Component {
@@ -64,11 +64,7 @@ class App extends Component {
         }
 
         if (this.checkDuplicateCards(pokeName)){
-            if (Swal.fire({  
-                title: 'Card Removed',  
-                type: 'success',  
-                text: 'Your change has been saved.',  
-            })) {
+            if (window.confirm(`You already have this card in your collection. Do you want to remove ${pokeName} from your list of Pokémon cards?`)) {
                 this.removeCard(pokeName);
             }
         }
@@ -210,13 +206,7 @@ class App extends Component {
                         )} />
         
                         <Route path="/battle" render={props => (
-                            <React.Fragment>
-                                <section>
-                                    <Battle
-                                        cards={this.state.userCards}
-                                        saveCard={this.saveCard}/>
-                                </section>
-                            </React.Fragment>
+                            <Battle />
                         )} />
         
                     </div>        
