@@ -8,7 +8,7 @@ import Menu from './components/layout/Menu.js';
 import LoadingAnimation from './components/layout/LoadingAnimation.js';
 
 // Externa bibliotek
-// import Swal from 'sweetalert2';
+import Swal from 'sweetalert2';
 
 
 class App extends Component {
@@ -54,10 +54,14 @@ class App extends Component {
         let continueLoop = true;
         let pokeName;
         // Hindrar användaren från att spara mer än 6 kort
-        // if (this.state.userCards.length >= 6) {
-        //     alert("You have reached the limit of 6 cards");
-        //     return null
-        // }
+        if (this.state.userCards.length >= 6) {
+            Swal.fire({  
+                title: 'You already have six Pokémon cards!',  
+                type: 'error',  
+                text: 'Remove one before adding a new one.',  
+            });
+            return null
+        }
         while (continueLoop === true) {
             if (currentElement.hasAttribute("data-id")) {
                 cardID = currentElement.getAttribute("data-id");
@@ -69,12 +73,20 @@ class App extends Component {
         }
 
         if (this.checkDuplicateCards(pokeName)){
-            if (window.confirm(`You already have this card in your collection. Do you want to remove ${pokeName} from your list of Pokémon cards?`)) {
+            if (Swal.fire({  
+                title: 'Card Removed!',  
+                type: 'success',  
+                text: 'Your changes have been saved.',  
+            })) {
                 this.removeCard(pokeName);
             }
         }
 
-        else if (window.confirm(`Sure you want to add ${pokeName} to your list of Pokémon cards?`)) {
+        else if (Swal.fire({  
+            title: 'Card was added!',  
+            type: 'success',  
+            text: 'Your changes have been saved.',  
+        })) {
             this.state.cards.forEach(card => {
                 if (card.id === cardID) {
                     this.setState({
@@ -146,6 +158,7 @@ class App extends Component {
             cpuCards: randomPokeCard,
         })
         console.log(randomPokeCard);
+        return randomPokeCard
     }
 
     onSearchChange = (event) => {
@@ -211,14 +224,7 @@ class App extends Component {
                         )} />
         
                         <Route path="/battle" render={props => (
-                            <React.Fragment>
-                                <section>
-                                    <Battle
-                                        cards={this.state.userCards}
-                                        saveCard={this.saveCard}
-                                        getRandomPokeCard={this.getRandomPokeCard}/>
-                                </section>
-                            </React.Fragment>
+                            <Battle />
                         )} />
         
                     </div>        
