@@ -116,7 +116,6 @@ class App extends Component {
     }
 
     checkDuplicateCards = (pokeName) => {
-        console.log(this.state.userCards);
         this.filterUserCards();
         for(var key in this.state.userCards) {
             if (this.state.userCards[key] != null) {
@@ -137,7 +136,6 @@ class App extends Component {
         this.setState({
             userCards: updatedCards,
         });
-        console.log(this.state.userCards);
         this.saveCardsToLS(this.state.userCards);            
     };             
 
