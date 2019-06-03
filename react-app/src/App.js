@@ -18,7 +18,7 @@ class App extends Component {
         cardsLoaded: false,
         searchfield: "",
         userCards: [],
-        cpuCards: []
+        // cpuCards: []
     }
 
     // Körs automatiskt när komponenter laddas in i DOM
@@ -156,7 +156,7 @@ class App extends Component {
         const randomNumber = Math.floor((Math.random() * 189) + 1);
         const randomPokeCard = this.state.cards[randomNumber];
         this.setState({
-            cpuCards: randomPokeCard,
+            computerPoke: randomPokeCard,
         })
         console.log(randomPokeCard);
         return randomPokeCard

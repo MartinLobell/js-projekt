@@ -8,19 +8,23 @@ export default class MyPokemons extends Component {
         userPoke: undefined,
     }
 
+    getComputerPoke = () => {
+        this.setState({
+            computerPoke: this.props.getRandomPokeCard(),
+        })
+    }
+
     render() {
         const computerPoke = {}
         return (
             <div>
                 <h1>Battle page</h1>
                 <button onClick={this.props.getRandomPokeCard}>Start Game</button>
-                {/* <Card 
-                    key={i} 
-                    id={cards[i].id} 
-                    name={cards[i].name}
-                    image={cards[i].imageUrl}
-                    saveCard={saveCard}
-                /> */}
+                {this.state.computerPoke && <Card 
+                    id={this.state.computerPoke.id} 
+                    name={this.state.computerPoke.name}
+                    image={this.state.computerPoke.imageUrl}
+                />}
             </div>
             
         )
