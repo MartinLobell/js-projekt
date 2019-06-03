@@ -58,7 +58,7 @@ class App extends Component {
             Swal.fire({  
                 title: 'You already have six Pokémon cards!',  
                 type: 'error',  
-                text: 'Remove one before adding a new one.',  
+                text: "You'll have to remove one before adding a new one.",  
             });
             return null
         }
@@ -75,8 +75,7 @@ class App extends Component {
         if (this.checkDuplicateCards(pokeName)){
             if (Swal.fire({  
                 title: 'Card Removed!',  
-                type: 'success',  
-                text: 'Your changes have been saved.',  
+                text: 'Your changes have been saved.',
             })) {
                 this.removeCard(pokeName);
             }
