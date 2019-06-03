@@ -55,7 +55,11 @@ class App extends Component {
         let pokeName;
         // Hindrar användaren från att spara mer än 6 kort
         if (this.state.userCards.length >= 6) {
-            alert("You have reached the limit of 6 cards");
+            Swal.fire({  
+                title: 'You already have six Pokémon cards!',  
+                type: 'error',  
+                text: 'Remove one before adding a new one.',  
+            });
             return null
         }
         while (continueLoop === true) {
