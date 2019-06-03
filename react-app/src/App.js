@@ -223,7 +223,8 @@ class App extends Component {
                         )} />
         
                         <Route path="/battle" render={props => (
-                            <Battle />
+                            <Battle
+                                getRandomPokeCard={this.getRandomPokeCard}/>
                         )} />
         
                     </div>        
