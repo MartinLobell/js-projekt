@@ -108,11 +108,18 @@ class App extends Component {
     }
 
     removeCard = (pokeName) => {
+        const updatedCards = this.state.userCards;
+        updatedCards.forEach((card, index) => {
+            if (card.name === pokeName) {
+                updatedCards.splice(index, 1);
+            }
+        });
         this.setState({
-            userCards: [...this.state.userCards.filter(card => card.name !== pokeName)],
-        })
+            userCards: updatedCards,
+        });
+        console.log(this.state.userCards);
         this.saveCardsToLS(this.state.userCards);            
-    };                
+    };             
 
     filterUserCards = () => {
         var filteredUserCards = this.state.userCards.filter(function (idx) {
