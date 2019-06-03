@@ -4,7 +4,12 @@ import Card from '../Card';
 export default class MyPokemons extends Component {
 
     state = {
-        computerPoke: undefined,
+        computerPoke: {
+            id: "base2-25",
+            name: "Pinsir",
+            imageUrl: "https://images.pokemontcg.io/base2/25.png",
+        },
+        // computerPoke: undefined,
         userPoke: undefined,
     }
 
@@ -15,16 +20,19 @@ export default class MyPokemons extends Component {
     }
 
     render() {
-        const computerPoke = {}
+        console.log(this.state.computerPoke);
         return (
             <div>
                 <h1>Battle page</h1>
                 <button onClick={this.props.getRandomPokeCard}>Start Game</button>
-                {this.state.computerPoke && <Card 
-                    id={this.state.computerPoke.id} 
-                    name={this.state.computerPoke.name}
-                    image={this.state.computerPoke.imageUrl}
-                />}
+                <div>
+                    {this.state.computerPoke && <Card 
+                        id={this.state.computerPoke.id} 
+                        name={this.state.computerPoke.name}
+                        image={this.state.computerPoke.imageUrl}
+                    />}
+                </div>
+                
             </div>
             
         )
