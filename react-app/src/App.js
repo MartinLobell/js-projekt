@@ -54,10 +54,10 @@ class App extends Component {
         let continueLoop = true;
         let pokeName;
         // Hindrar användaren från att spara mer än 6 kort
-        if (this.state.userCards.length >= 6) {
-            alert("You have reached the limit of 6 cards");
-            return null
-        }
+        // if (this.state.userCards.length >= 6) {
+        //     alert("You have reached the limit of 6 cards");
+        //     return null
+        // }
         while (continueLoop === true) {
             if (currentElement.hasAttribute("data-id")) {
                 cardID = currentElement.getAttribute("data-id");
@@ -140,8 +140,8 @@ class App extends Component {
 
     getRandomPokeCard = () => {
 
-        var randomNumber = Math.floor((Math.random() * 151) + 1);
-        var randomPokeCard = this.state.cards[randomNumber];
+        const randomNumber = Math.floor((Math.random() * 189) + 1);
+        const randomPokeCard = this.state.cards[randomNumber];
         this.setState({
             cpuCards: randomPokeCard,
         })
@@ -215,7 +215,8 @@ class App extends Component {
                                 <section>
                                     <Battle
                                         cards={this.state.userCards}
-                                        saveCard={this.saveCard}/>
+                                        saveCard={this.saveCard}
+                                        getRandomPokeCard={this.getRandomPokeCard}/>
                                 </section>
                             </React.Fragment>
                         )} />
