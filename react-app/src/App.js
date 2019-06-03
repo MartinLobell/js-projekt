@@ -26,10 +26,9 @@ class App extends Component {
         this.loadCardsToState(); // Hämtar sparade kort från LS
     }
 
-
     // Hämtar pokes från API
     getPokeCard = () => {
-        fetch(`https://api.pokemontcg.io/v1/cards/?setCode=base1|base2|base3&supertype=Pokemon&pageSize=500`)
+        fetch(`https://api.pokemontcg.io/v1/cards/?setCode=base1|base2|base3&rarity=Common|Uncommon|Rare&supertype=Pokemon&pageSize=500`)
             .then(res => res.json())
             .then(json => {
                 this.setState({
