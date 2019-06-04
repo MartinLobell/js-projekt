@@ -1,33 +1,67 @@
-.App {
-  text-align: center;
+#main-container {
+  padding-bottom: 2rem;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+section {
+  padding: 2rem 0;
 }
 
-.App-link {
-  color: #61dafb;
+#search-field {
+  width: 100%;
+  max-width: 250px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+div.card {
+  width: 200px;
+  padding: 8px;
+  margin: 8px;
+}
+
+div.card h2 {
+  margin: 0.25rem 0;
+}
+
+
+
+
+/* Matchar ramverkets breakpoints */
+@media only screen and (max-width: 1167px) {
+
+  div.card {
+    /* max-width: ; */
   }
-  to {
-    transform: rotate(360deg);
+  
+}
+
+
+
+
+@media only screen and (max-width: 664px) {
+
+  div.card {
+    width: 30%;
   }
+
+}
+
+@media only screen and (max-width: 500px) {
+
+  div.card {
+    width: 42%;
+  }
+
+}
+
+@media only screen and (max-width: 350px) {
+
+  div.card {
+    width: 78%;
+  }
+
 }

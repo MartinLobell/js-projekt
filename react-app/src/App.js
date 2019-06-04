@@ -6,6 +6,7 @@ import Cardlist from './components/Cardlist.js';
 import SearchBox from './components/SearchBox.js';
 import Menu from './components/layout/Menu.js';
 import LoadingAnimation from './components/layout/LoadingAnimation.js';
+import './App.css';
 
 // Externa bibliotek
 import Swal from 'sweetalert2';
@@ -178,20 +179,21 @@ class App extends Component {
                     <div className="tc" id="main-container">
                         <Menu />
                         <a href="/"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1280px-International_Pok%C3%A9mon_logo.svg.png" alt="Poke-logo" width="400px"></img></a>
-                        <Route exact path="/" render={props => (
-                            <React.Fragment>
-                                <LoadingAnimation />
-                            </React.Fragment>
-                        )} />
-        
-                        <Route path="/my-cards" render={props => (
-                            <MyPokemons />
-                        )} />
-        
-                        <Route path="/battle" render={props => (
-                            <Battle />
-                        )} />
-        
+                        <div className="container">
+                            <Route exact path="/" render={props => (
+                                <React.Fragment>
+                                    <LoadingAnimation />
+                                </React.Fragment>
+                            )} />
+            
+                            <Route path="/my-cards" render={props => (
+                                <MyPokemons />
+                            )} />
+            
+                            <Route path="/battle" render={props => (
+                                <Battle />
+                            )} />
+                        </div>
                     </div>        
                 </Router>
                 ); 
@@ -201,31 +203,34 @@ class App extends Component {
                     <div className="tc" id="main-container">
                         <Menu />
                         <a href="/"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/International_Pok%C3%A9mon_logo.svg/1280px-International_Pok%C3%A9mon_logo.svg.png" alt="Poke-logo" width="400px"></img></a>
-                        <Route exact path="/" render={props => (
-                            <React.Fragment>
-                                <SearchBox searchChange={this.onSearchChange}/>
-                                <section>
-                                    <Cardlist
-                                        cards={filteredcards}
-                                        saveCard={this.saveCard}/>
-                                </section>
-                            </React.Fragment>
-                        )} />
-        
-                        <Route path="/my-cards" render={props => (
-                            <React.Fragment>
-                                <section>
-                                    <Cardlist
-                                        cards={this.state.userCards}
-                                        saveCard={this.saveCard}/>
-                                </section>
-                            </React.Fragment>
-                        )} />
-        
-                        <Route path="/battle" render={props => (
-                            <Battle
-                                getRandomPokeCard={this.getRandomPokeCard}/>
-                        )} />
+                        <div className="container">
+                            <Route exact path="/" render={props => (
+                                <React.Fragment>
+                                    <SearchBox searchChange={this.onSearchChange}/>
+                                    <section>
+                                        <Cardlist
+                                            cards={filteredcards}
+                                            saveCard={this.saveCard}/>
+                                    </section>
+                                </React.Fragment>
+                            )} />
+            
+                            <Route path="/my-cards" render={props => (
+                                <React.Fragment>
+                                    <section>
+                                        <Cardlist
+                                            cards={this.state.userCards}
+                                            saveCard={this.saveCard}/>
+                                    </section>
+                                </React.Fragment>
+                            )} />
+            
+                            <Route path="/battle" render={props => (
+                                <Battle
+                                    getRandomPokeCard={this.getRandomPokeCard}/>
+                            )} />
+                        </div>
+                        
         
                     </div>        
                 </Router>
