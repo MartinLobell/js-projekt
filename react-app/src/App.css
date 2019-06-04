@@ -1,6 +1,12 @@
 #main-container {
   padding-bottom: 2rem;
-  box-sizing: border-box;
+  box-sizing: border-box !important;
+}
+
+.banner-image {
+  width: 90%;
+  max-width: 400px;
+  padding: 0 0.5rem;
 }
 
 .container {
@@ -18,7 +24,7 @@ section {
 }
 
 div.card {
-  width: 200px;
+  width: 18%;
   padding: 8px;
   margin: 8px;
 }
@@ -31,26 +37,23 @@ div.card h2 {
 
 
 /* Matchar ramverkets breakpoints */
-@media only screen and (max-width: 1167px) {
+@media only screen and (max-width: 1100px) {
 
   div.card {
-    /* max-width: ; */
+    width: 22%;
   }
   
 }
 
-
-
-
-@media only screen and (max-width: 664px) {
+@media only screen and (max-width: 825px) {
 
   div.card {
-    width: 30%;
+    width: 29%;
   }
 
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 550px) {
 
   div.card {
     width: 42%;
@@ -58,7 +61,7 @@ div.card h2 {
 
 }
 
-@media only screen and (max-width: 350px) {
+@media only screen and (max-width: 325px) {
 
   div.card {
     width: 78%;
