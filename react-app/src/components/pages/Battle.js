@@ -23,7 +23,7 @@ export default class MyPokemons extends Component {
         console.log(this.state.computerPoke);
         return (
             <div>
-                <h1>Battle page</h1>
+                <h1>Work in progress...</h1>
                 <button onClick={this.props.getRandomPokeCard}>Start Game</button>
                 <div>
                     {this.state.computerPoke && <Card 

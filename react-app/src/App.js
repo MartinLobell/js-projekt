@@ -54,14 +54,14 @@ class App extends Component {
         let continueLoop = true;
         let pokeName;
         // Hindrar användaren från att spara mer än 6 kort
-        if (this.state.userCards.length >= 6) {
-            Swal.fire({  
-                title: 'You already have six Pokémon cards!',  
-                type: 'error',  
-                text: "You'll have to remove one before adding a new one.",  
-            });
-            return null
-        }
+        // if (this.state.userCards.length >= 6) {
+        //     Swal.fire({  
+        //         title: 'You already have six Pokémon cards!',  
+        //         type: 'error',  
+        //         text: "You'll have to remove one before adding a new one.",  
+        //     });
+        //     return null
+        // }
         while (continueLoop === true) {
             if (currentElement.hasAttribute("data-id")) {
                 cardID = currentElement.getAttribute("data-id");
