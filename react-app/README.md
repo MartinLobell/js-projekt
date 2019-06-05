@@ -36,3 +36,9 @@ If you aren’t satisfied with the build tool and configuration choices, you can
 Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+## Future ambitions
+
+- Duelling against CPU according to a downscaled version of the original TCG-rules and consisting of the data that is sent from the PTCG-API.
+- Implementing a reward system, making it impossible to choose a Pokémon that is evolved before having reached a higher level/won a specific number of fights.
+- Clicking on a PokéCard should turn the card to full-screen size on smaller screens (tablets >). This to make it easy to read specifics from the card, espcially for the smartphone design.

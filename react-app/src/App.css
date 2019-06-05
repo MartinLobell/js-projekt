@@ -65,6 +65,7 @@ div.card h2 {
 
   div.card {
     width: 78%;
+    word-break: break-all;
   }
 
 }
